@@ -13,7 +13,7 @@
 	<div class="row d-flex justify-content-center">
   		<div class="col-md-6">
   		<h3>Add Comment</h3>
-	    <form th:action="@{/movies/comments/} + ${movieId}" th:object="${comment}" method="post">
+	    <form th:action="@{/comments/} + ${movieId}" th:object="${comment}" method="post">
 		  <div class="form-group">
 		    <label for="author">Author</label>
 		    <input type="text" class="form-control" id="author" th:field="*{author}">

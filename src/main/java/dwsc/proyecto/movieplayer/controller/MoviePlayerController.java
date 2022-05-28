@@ -33,18 +33,6 @@ public class MoviePlayerController {
 	NewsClient newsClient;
 
 	@GetMapping("/")
-	public String getNews(Map<String, List<News>> model) throws Exception {
-
-		try {
-			ResponseEntity<List<News>> news = newsClient.getAllNews();
-			model.put("news", news.getBody());
-		} catch (Exception e) {
-			throw new Exception(e.getMessage());
-		}
-		return "index";
-	}
-
-	@GetMapping("/movies")
 	public String getMovies(Map<String, List<Movie>> model,
 			@RequestParam(value = "title", required = false) String title) throws Exception {
 		if (title != null) {
@@ -67,7 +55,7 @@ public class MoviePlayerController {
 		return "movies";
 	}
 
-	@GetMapping("/movies/movie/{movieId}")
+	@GetMapping("/movie/{movieId}")
 	public String getMovieDetails(Model model, @PathVariable String movieId) throws Exception {
 		try {
 			ResponseEntity<Movie> movieRes = movieClient.getMoviesById(movieId);
@@ -84,20 +72,20 @@ public class MoviePlayerController {
 		return "movie";
 	}
 
-	@GetMapping("/movies/new-comment/{movieId}")
+	@GetMapping("/new-comment/{movieId}")
 	public String createCommentForm(Model model, @PathVariable String movieId) {
 		model.addAttribute("comment", new Comment());
 		model.addAttribute("movieId", movieId);
 		return "newComment";
 	}
 
-	@PostMapping("/movies/comments/{movieId}")
+	@PostMapping("/comments/{movieId}")
 	public String addComment(@ModelAttribute Comment comment, @PathVariable String movieId) throws Exception {
 		try {
 			commentClient.addComment(movieId, comment);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
-		return "redirect:/movies/" + movieId;
+		return "redirect:/" + movieId;
 	}
 }
