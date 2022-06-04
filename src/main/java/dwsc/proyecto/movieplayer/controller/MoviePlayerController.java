@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import dwsc.proyecto.movieplayer.domain.Comment;
 import dwsc.proyecto.movieplayer.domain.Movie;
-import dwsc.proyecto.movieplayer.domain.News;
 import dwsc.proyecto.movieplayer.service.FindMovieClient;
 import dwsc.proyecto.movieplayer.service.MovieCommentClient;
 import dwsc.proyecto.movieplayer.service.NewsClient;
 
 @Controller
+@RequestMapping(value = "/movies")
 public class MoviePlayerController {
 	@Autowired
 	FindMovieClient movieClient;
@@ -32,7 +32,7 @@ public class MoviePlayerController {
 	@Autowired
 	NewsClient newsClient;
 
-	@GetMapping("/")
+	@GetMapping
 	public String getMovies(Map<String, List<Movie>> model,
 			@RequestParam(value = "title", required = false) String title) throws Exception {
 		if (title != null) {
@@ -52,7 +52,7 @@ public class MoviePlayerController {
 			}
 		}
 
-		return "movies";
+		return "index";
 	}
 
 	@GetMapping("/movie/{movieId}")
@@ -86,6 +86,6 @@ public class MoviePlayerController {
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
-		return "redirect:/" + movieId;
+		return "redirect:/movies/movie/" + movieId;
 	}
 }
