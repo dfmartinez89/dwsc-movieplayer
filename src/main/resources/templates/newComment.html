@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>New Comment</title>
+<title>Movie Player</title>
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -13,7 +13,7 @@
 	<div class="row d-flex justify-content-center">
   		<div class="col-md-6">
   		<h3>Add Comment</h3>
-	    <form th:action="@{/movies/comments/} + ${movieId}" th:object="${comment}" method="post">
+	    <form th:action="@{/comments/} + ${movieId}" th:object="${comment}" method="post">
 		  <div class="form-group">
 		    <label for="author">Author</label>
 		    <input type="text" class="form-control" id="author" th:field="*{author}">

@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Movies</title>
+<title>Movie Player</title>
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -10,14 +10,14 @@
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" th:href="@{/movies}">Movies</a>
+			<a class="navbar-brand" th:href="@{/}">Movies</a>
 			<a class="navbar-brand" th:href="@{http://localhost:8080/ProductorConsumidor/}">News</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<form class="d-flex" role="search" th:action="@{/movies}">
+				<form class="d-flex" role="search" th:action="@{/}">
 					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="title">
 					<button class="btn btn-outline-success" type="submit">Search</button>
 				</form>
@@ -36,7 +36,7 @@
 				<div class="card w-75">
 					<img th:src="${movie.url}" class="card-img-top" alt="Poster">
 					<div class="card-body">
-						<a th:href="@{/movies/movie/} +${movie.id}"><h5 class="card-title" th:text="${movie.title}"></h5></a>
+						<a th:href="@{/} +${movie.id}"><h5 class="card-title" th:text="${movie.title}"></h5></a>
 						<p class="card-text" th:text="${movie.description}">...</p>
 					</div>
 				</div>

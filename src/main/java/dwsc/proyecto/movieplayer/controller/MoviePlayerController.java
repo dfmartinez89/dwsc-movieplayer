@@ -21,7 +21,6 @@ import dwsc.proyecto.movieplayer.service.MovieCommentClient;
 import dwsc.proyecto.movieplayer.service.NewsClient;
 
 @Controller
-@RequestMapping(value = "/movies")
 public class MoviePlayerController {
 	@Autowired
 	FindMovieClient movieClient;
@@ -32,7 +31,7 @@ public class MoviePlayerController {
 	@Autowired
 	NewsClient newsClient;
 
-	@GetMapping
+	@GetMapping(value = "/")
 	public String getMovies(Map<String, List<Movie>> model,
 			@RequestParam(value = "title", required = false) String title) throws Exception {
 		if (title != null) {
@@ -55,7 +54,7 @@ public class MoviePlayerController {
 		return "index";
 	}
 
-	@GetMapping("/movie/{movieId}")
+	@GetMapping("/{movieId}")
 	public String getMovieDetails(Model model, @PathVariable String movieId) throws Exception {
 		try {
 			ResponseEntity<Movie> movieRes = movieClient.getMoviesById(movieId);
@@ -86,6 +85,6 @@ public class MoviePlayerController {
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
-		return "redirect:/movies/movie/" + movieId;
+		return "redirect:/" + movieId;
 	}
 }
