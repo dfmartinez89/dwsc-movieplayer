@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import dwsc.proyecto.movieplayer.domain.Comment;
 import dwsc.proyecto.movieplayer.domain.Movie;
+import dwsc.proyecto.movieplayer.exceptions.InvalidCommentException;
 import dwsc.proyecto.movieplayer.service.FindMovieClient;
 import dwsc.proyecto.movieplayer.service.MovieCommentClient;
 import dwsc.proyecto.movieplayer.service.NewsClient;
@@ -54,7 +56,7 @@ public class MoviePlayerController {
 	}
 
 	@GetMapping("/{movieId}")
-	public String getMovieDetails(Model model, @PathVariable String movieId) throws Exception {
+	public String getMovieDetails(Model model, @PathVariable(required = true) String movieId) throws Exception {
 		try {
 			ResponseEntity<Movie> movieRes = movieClient.getMoviesById(movieId);
 			Movie movie = movieRes.getBody();
@@ -71,7 +73,7 @@ public class MoviePlayerController {
 	}
 
 	@GetMapping("/new-comment/{movieId}")
-	public String createCommentForm(Model model, @PathVariable String movieId) {
+	public String createCommentForm(Model model, @PathVariable(required = true) String movieId) {
 		model.addAttribute("comment", new Comment());
 		model.addAttribute("movieId", movieId);
 		return "newComment";
@@ -79,6 +81,9 @@ public class MoviePlayerController {
 
 	@PostMapping("/comments/{movieId}")
 	public String addComment(@ModelAttribute Comment comment, @PathVariable String movieId) throws Exception {
+		if (comment.getAuthor().isBlank() || comment.getText().isBlank()) {
+			throw new InvalidCommentException(HttpStatus.BAD_REQUEST, "Please add all fields");
+		}
 		try {
 			commentClient.addComment(movieId, comment);
 		} catch (Exception e) {
