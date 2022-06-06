@@ -24,7 +24,7 @@
 		  </div>
 		  <div class="form-group">
 		    <label for="score">Score</label>
-		    <input class="form-control" id="score" th:field="*{score}" >
+		    <input class="form-control" type="number" min={0} max={5} id="score" th:field="*{score}" >
 		  </div>
 		  <button type="submit" class="btn btn-primary">Submit</button>
 		</form>
