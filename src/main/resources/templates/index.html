@@ -10,7 +10,6 @@
 		<script nomodule src="/build/comment-movie.js"></script>
 		<script src='https://unpkg.com/@dev-engage/stencil-bootstrap@<current_version>/dist/stb.js'></script>
 </head>
-
 <body>
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -33,8 +32,7 @@
 	</nav>
 	<!-- End Navbar -->
 
-
-	<div class="container">
+	<div class="container mt-4">
 		<div th:if="${#lists.isEmpty(movies)}">There are no movies saved in our system</div>
 
 		<!-- Cards Grid -->
