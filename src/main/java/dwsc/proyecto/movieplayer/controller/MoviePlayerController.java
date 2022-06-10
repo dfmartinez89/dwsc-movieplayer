@@ -37,7 +37,7 @@ public class MoviePlayerController {
 			@RequestParam(value = "title", required = false) String title) throws Exception {
 		if (title != null) {
 			try {
-				ResponseEntity<List<Movie>> movies = movieClient.getMoviesByTitle(title);
+				ResponseEntity<List<Movie>> movies = movieClient.getMoviesByTitleLike(title);
 				model.put("movies", movies.getBody());
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
